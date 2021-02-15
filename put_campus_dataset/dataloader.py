@@ -3,12 +3,23 @@ import os
 
 NUM_CLASSES = 12
 
-weights = [0, 3.03179758, 6.12635109, 6.62935517, 5.00587831, 5.10223856,
-           5.70209559, 6.76043488, 7.14426043, 7.67151577, 6.27170891, 10.45687937]
+'''Weights:
+ \omega = \frac{1}{\ln \left ( c + \rho  \right )}
+ 
+ c = 1.1
+ p = probability of class
+ 
+ Weight for _background_ set to 0.
+'''
+
+weights = [0, 3.00048685, 6.08059223, 6.58523408, 4.95994623, 5.05663151,
+           5.65568241, 6.71689466, 7.10278844, 7.63378013, 6.22632709, 10.45622322]
+
+probabilities = [0.01706381, 0.29049396, 0.07740983, 0.06289938, 0.12127174, 0.11664505,
+                 0.09181439, 0.05949887, 0.05030925, 0.03928208, 0.07295841, 0.00035324]
 
 
 def put_campus_dataset(path, image_size=None, augment_function=None, num_parallel_calls=tf.data.experimental.AUTOTUNE):
-
     def get_subdirectory_files(subdir):
         sub_path = os.path.join(path, subdir)
         return sorted([os.path.join(dp, f) for dp, dn, fn in
@@ -55,8 +66,7 @@ def _read_labels(path):
 
 
 def get_weights():
-    return tf.constant([0, 3.03179758, 6.12635109, 6.62935517, 5.00587831, 5.10223856,
-                        5.70209559, 6.76043488, 7.14426043, 7.67151577, 6.27170891, 10.45687937])
+    return tf.constant(weights)
 
 
 def get_stats_weights():

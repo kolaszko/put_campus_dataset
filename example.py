@@ -19,8 +19,6 @@ def example(path):
     plt.show()
 
 
-
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--path', type=str, help='Path to put_campus_dataset')
@@ -28,5 +26,3 @@ if __name__ == '__main__':
     args, _ = parser.parse_known_args()
 
     example(args.path)
-
-
